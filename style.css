@@ -45,3 +45,10 @@
   border: 2px solid;
   flex-basis: 100%;
 }
+
+#decimal {
+  flex: auto;
+  background-color: aqua;
+  border-color: black;
+  border: 2px solid;
+}

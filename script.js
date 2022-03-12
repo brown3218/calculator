@@ -1,17 +1,14 @@
-// Create the functions that populate the display when you click the number buttons… you should be storing the ‘display value’ in a variable somewhere for use in the next step.
-
 let display = document.getElementById("display");
 const equalsButton = document.getElementById("equals");
+const minusButton = document.getElementById("+/-");
+const decimal = document.getElementById("decimal");
 
 display.innerText = "";
 let storedValue = "";
 let tempValue = 0;
-let displayValue = 0;
 let operator;
-
-const updateDisplayy = () => {
-  display.innerText = displayValue;
-};
+let activeState = "typing";
+let operatorMemory;
 
 document.querySelectorAll(".number").forEach((item) => {
   item.addEventListener("click", () => {
@@ -29,51 +26,65 @@ document.querySelectorAll(".number").forEach((item) => {
 document.querySelectorAll(".operator").forEach((item) => {
   item.addEventListener("click", () => {
     if (storedValue === "") {
-      // store display as first number
-      // storedValue = parseInt(tempValue);
-      operator = item.textContent;
       secondNumber = parseInt(tempValue);
       storedValue = parseInt(tempValue);
       display.innerText = tempValue;
-      activeState = "reset";
-    } else {
       operator = item.textContent;
-      secondNumber = parseInt(tempValue);
-      storedValue = parseInt(operate(item.textContent, storedValue, secondNumber));
+      activeState = "reset";
+    } else if (operator === undefined || tempValue === 0) {
+      operator = item.textContent;
+    } else {
+      storedValue = operate(operator, parseInt(storedValue), parseInt(tempValue));
       display.innerText = storedValue;
+      operator = item.textContent;
       activeState = "reset";
     }
   });
 });
 
 equalsButton.addEventListener("click", () => {
-  storedValue = operate(operator, parseInt(storedValue), parseInt(tempValue));
-  tempValue = 0;
-  display.innerText = storedValue;
+  if (storedValue === "") {
+  } else if (operator === undefined) {
+    storedValue = operate(operatorMemory, parseInt(storedValue), parseInt(tempValue));
+    display.innerText = storedValue;
+    activeState = "reset";
+  } else {
+    storedValue = operate(operator, parseInt(storedValue), parseInt(tempValue));
+    operatorMemory = operator;
+    operator = undefined;
+    display.innerText = storedValue;
+    activeState = "reset";
+  }
 });
 
-//   item.addEventListener("click", () => {
-//     storedValue = operate(operator, storedValue, tempValue);
-//     display.innerText = storedValue;
-//   });
-// });
+minusButton.addEventListener("click", () => {
+  if ((operator === undefined) & (storedValue === "")) {
+    storedValue = parseInt(tempValue) * -1;
+    display.innerText = storedValue;
+    activeState = "reset";
+  } else if (operator === undefined) {
+    storedValue = storedValue * -1;
+    display.innerText = storedValue;
+  } else {
+    tempValue = tempValue * -1;
+    display.innerText = tempValue;
+  }
+});
 
-// equalsButton.forEach((item) => {
-//     item.addEventListener("click", () => {
-//         storedValue = operate(item.textContent, storedValue, tempValue)
-//         display.innerText = storedValue;
-
-let secondNumber = 0;
-let activeState = "typing";
+decimal.addEventListener("click", () => {
+  if (tempValue.split(".").length < 2) {
+    tempValue = tempValue + ".";
+    display.innerText = tempValue;
+  }
+});
 
 let clearDispaly = () => {
-  storedValue = 0;
+  storedValue = "";
   tempValue = 0;
-  display.innerText = 0;
+  display.innerText = storedValue;
 };
 
 document.getElementById("clear").addEventListener("click", clearDispaly);
-// Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
 
 //Math functions
 const add = (a, b) => {
@@ -89,7 +100,9 @@ const multiply = (a, b) => {
 };
 
 const divide = (a, b) => {
-  return a / b;
+  if (b === 0) {
+    return "Ew! Don't divide by 0.";
+  } else return a / b;
 };
 
 const operate = (operator, firstNumber, secondNumber) => {
@@ -108,23 +121,3 @@ const operate = (operator, firstNumber, secondNumber) => {
       break;
   }
 };
-
-//pressOperater
-
-// press +
-
-// displayValue =3
-// storedValue = 2
-// tempValue
-//operatorValue
-
-//storedValue = 0
-//When press number button, update display values
-
-//When press operator button operate
-//tempValue = displayValue
-// storedValue = operate(item.contents, storedValue, tempValue)
-//displayValue = storedValue
-
-// storedValue = operate(item, storedValue, displayValue)
-//display = stored value
