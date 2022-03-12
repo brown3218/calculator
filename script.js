@@ -26,15 +26,15 @@ document.querySelectorAll(".number").forEach((item) => {
 document.querySelectorAll(".operator").forEach((item) => {
   item.addEventListener("click", () => {
     if (storedValue === "") {
-      secondNumber = parseInt(tempValue);
-      storedValue = parseInt(tempValue);
+      secondNumber = parseFloat(tempValue);
+      storedValue = parseFloat(tempValue);
       display.innerText = tempValue;
       operator = item.textContent;
       activeState = "reset";
     } else if (operator === undefined || tempValue === 0) {
       operator = item.textContent;
     } else {
-      storedValue = operate(operator, parseInt(storedValue), parseInt(tempValue));
+      storedValue = operate(operator, parseFloat(storedValue), parseFloat(tempValue));
       display.innerText = storedValue;
       operator = item.textContent;
       activeState = "reset";
@@ -45,11 +45,11 @@ document.querySelectorAll(".operator").forEach((item) => {
 equalsButton.addEventListener("click", () => {
   if (storedValue === "") {
   } else if (operator === undefined) {
-    storedValue = operate(operatorMemory, parseInt(storedValue), parseInt(tempValue));
+    storedValue = operate(operatorMemory, parseFloat(storedValue), parseFloat(tempValue));
     display.innerText = storedValue;
     activeState = "reset";
   } else {
-    storedValue = operate(operator, parseInt(storedValue), parseInt(tempValue));
+    storedValue = operate(operator, parseFloat(storedValue), parseFloat(tempValue));
     operatorMemory = operator;
     operator = undefined;
     display.innerText = storedValue;
@@ -59,7 +59,7 @@ equalsButton.addEventListener("click", () => {
 
 minusButton.addEventListener("click", () => {
   if ((operator === undefined) & (storedValue === "")) {
-    storedValue = parseInt(tempValue) * -1;
+    storedValue = parseFloat(tempValue) * -1;
     display.innerText = storedValue;
     activeState = "reset";
   } else if (operator === undefined) {
