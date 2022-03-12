@@ -27,6 +27,13 @@
   border: 2px solid;
 }
 
+#equals {
+  flex: auto;
+  background-color: orange;
+  border-color: black;
+  border: 2px solid;
+}
+
 .function {
   flex: auto;
   background-color: grey;
