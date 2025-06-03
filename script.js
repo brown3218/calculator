@@ -123,3 +123,20 @@ const operate = (operator, firstNumber, secondNumber) => {
       break;
   }
 };
+
+// Play a short "fat" noise when the button is clicked
+const noiseButton = document.getElementById("noise-button");
+if (noiseButton) {
+  noiseButton.addEventListener("click", () => {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    oscillator.type = "square";
+    oscillator.frequency.setValueAtTime(120, ctx.currentTime);
+    gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    oscillator.start();
+    oscillator.stop(ctx.currentTime + 0.3);
+  });
+}
