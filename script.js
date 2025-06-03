@@ -26,15 +26,15 @@ document.querySelectorAll(".number").forEach((item) => {
 document.querySelectorAll(".operator").forEach((item) => {
   item.addEventListener("click", () => {
     if (storedValue === "") {
-      secondNumber = parseFloat(tempValue);
-      storedValue = parseFloat(tempValue);
+      secondNumber = parseInt(tempValue);
+      storedValue = parseInt(tempValue);
       display.innerText = tempValue;
       operator = item.textContent;
       activeState = "reset";
     } else if (operator === undefined || tempValue === 0) {
       operator = item.textContent;
     } else {
-      storedValue = operate(operator, parseFloat(storedValue), parseFloat(tempValue));
+      storedValue = operate(operator, parseInt(storedValue), parseInt(tempValue));
       display.innerText = storedValue;
       operator = item.textContent;
       activeState = "reset";
@@ -45,11 +45,11 @@ document.querySelectorAll(".operator").forEach((item) => {
 equalsButton.addEventListener("click", () => {
   if (storedValue === "") {
   } else if (operator === undefined) {
-    storedValue = operate(operatorMemory, parseFloat(storedValue), parseFloat(tempValue));
+    storedValue = operate(operatorMemory, parseInt(storedValue), parseInt(tempValue));
     display.innerText = storedValue;
     activeState = "reset";
   } else {
-    storedValue = operate(operator, parseFloat(storedValue), parseFloat(tempValue));
+    storedValue = operate(operator, parseInt(storedValue), parseInt(tempValue));
     operatorMemory = operator;
     operator = undefined;
     display.innerText = storedValue;
@@ -59,7 +59,7 @@ equalsButton.addEventListener("click", () => {
 
 minusButton.addEventListener("click", () => {
   if ((operator === undefined) & (storedValue === "")) {
-    storedValue = parseFloat(tempValue) * -1;
+    storedValue = parseInt(tempValue) * -1;
     display.innerText = storedValue;
     activeState = "reset";
   } else if (operator === undefined) {
@@ -72,8 +72,10 @@ minusButton.addEventListener("click", () => {
 });
 
 decimal.addEventListener("click", () => {
-  if (tempValue.split(".").length < 2) {
-    tempValue = tempValue + ".";
+  // tempValue can be a number after operations or clearing the calculator.
+  // Converting it to a string prevents runtime errors when using split.
+  if (tempValue.toString().split(".").length < 2) {
+    tempValue = tempValue.toString() + ".";
     display.innerText = tempValue;
   }
 });
