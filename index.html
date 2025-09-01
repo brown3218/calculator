@@ -1,43 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css" />
-    <script src="./script.js" defer></script>
-  </head>
-  <body>
-    <button id="noise-button" title="Play fat noise">Fat Noise</button>
-    <div id="container">
-      <div id="calculator">
-        <div id="display" style="height: 20px"></div>
-        <button class="break"></button>
-        <button class="function" id="clear">AC</button>
-        <button class="function" id="+/-">+/-</button>
-        <button class="function">~</button>
-        <button class="operator">/</button>
-        <button class="break"></button>
-        <button class="number">7</button>
-        <button class="number">8</button>
-        <button class="number">9</button>
-        <button class="operator">*</button>
-        <button class="break"></button>
-        <button class="number">4</button>
-        <button class="number">5</button>
-        <button class="number">6</button>
-        <button class="operator">-</button>
-        <button class="break"></button>
-        <button class="number">1</button>
-        <button class="number">2</button>
-        <button class="number">3</button>
-        <button class="operator">+</button>
-        <button class="break"></button>
-        <button class="number">0</button>
-        <button id="decimal">.</button>
-        <button id="equals">=</button>
-      </div>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>To-Do List</h1>
+    <form id="task-form">
+      <input id="new-task" type="text" placeholder="Enter a task" required />
+      <button type="submit">Add</button>
+    </form>
+    <ul id="task-list"></ul>
+  </main>
+</body>
 </html>

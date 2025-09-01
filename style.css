@@ -1,62 +1,52 @@
-.test {
-  color: blue;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
-#calculator {
+main {
+  max-width: 400px;
+  margin: 2rem auto;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+form {
   display: flex;
-  flex-wrap: wrap;
-  max-width: 200px;
+  gap: 0.5rem;
 }
 
-.break {
-  flex-basis: 100%;
-  height: 0;
+#new-task {
+  flex: 1;
+  padding: 0.5rem;
 }
 
-.number {
-  flex: auto;
-  background-color: aqua;
-  border-color: black;
-  border: 2px solid;
+#task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
 }
 
-.operator {
-  flex: auto;
-  background-color: orange;
-  border-color: black;
-  border: 2px solid;
+#task-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
 }
 
-#equals {
-  flex: auto;
-  background-color: orange;
-  border-color: black;
-  border: 2px solid;
+#task-list li.completed span {
+  text-decoration: line-through;
+  color: #888;
 }
 
-.function {
-  flex: auto;
-  background-color: grey;
-  border-color: black;
-  border: 2px solid;
-}
-
-#display {
-  border: 2px solid;
-  flex-basis: 100%;
-}
-
-#decimal {
-  flex: auto;
-  background-color: aqua;
-  border-color: black;
-  border: 2px solid;
-}
-
-#noise-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: pink;
-  border: 2px solid black;
+#task-list button {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1rem;
+  cursor: pointer;
 }
