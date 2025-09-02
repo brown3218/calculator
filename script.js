@@ -54,3 +54,38 @@ form.addEventListener("submit", (e) => {
 });
 
 renderTasks();
+
+const randomBtn = document.getElementById("random-bakugan");
+const bakuganInfo = document.getElementById("bakugan-info");
+
+async function fetchBakugan() {
+  if (!bakuganInfo) return;
+  bakuganInfo.textContent = "Loading...";
+  try {
+    const response = await fetch(
+      "https://bakugan.wiki/api.php?action=query&generator=random&grnnamespace=0&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=original&grnlimit=1&format=json&origin=*"
+    );
+    const data = await response.json();
+    const pages = data.query?.pages;
+    const page = pages[Object.keys(pages)[0]];
+    const title = page.title;
+    const description = page.extract;
+    const image = page.original?.source;
+    bakuganInfo.innerHTML = `<h2>${title}</h2>`;
+    if (image) {
+      const img = document.createElement("img");
+      img.src = image;
+      img.alt = title;
+      bakuganInfo.appendChild(img);
+    }
+    const p = document.createElement("p");
+    p.textContent = description;
+    bakuganInfo.appendChild(p);
+  } catch (err) {
+    bakuganInfo.textContent = "Failed to load Bakugan.";
+  }
+}
+
+if (randomBtn) {
+  randomBtn.addEventListener("click", fetchBakugan);
+}

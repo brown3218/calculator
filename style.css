@@ -50,3 +50,14 @@ form {
   font-size: 1rem;
   cursor: pointer;
 }
+
+#bakugan-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#bakugan-section img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}
